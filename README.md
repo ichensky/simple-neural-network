@@ -1,4 +1,4 @@
-# Simple neural network
+# Simple neural network in C# 
 
 A simple neural network has one `hidden layer`. 
 In this example, it is trained on MNIST images to be able to recognize digits.
