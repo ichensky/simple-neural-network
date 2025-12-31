@@ -70,23 +70,27 @@ Console.WriteLine("-----------------------------------");
     var num = rand.NextDouble();
 
 
-    double learningRate = 0.2;
-    int inputNodesCount = 784;
-    int hiddenNodesCount = 100;
-    int outputNodesCount = 10;
+    const int epochs = 2;
+    const double learningRate = 0.2;
+    const int inputNodesCount = 784;
+    const int hiddenNodesCount = 100;
+    const int outputNodesCount = 10;
 
     var neuralNetwork = new SimpleNeuralNetwork.SimpleNeuralNetwork(rand, inputNodesCount, hiddenNodesCount, outputNodesCount, learningRate);
     neuralNetwork.InitializeWeights();
 
-    foreach (var image in imagesTrain)
+    for (int e = 0; e < epochs; e++)
     {
-        Vector inputLayer = new([.. image.Pixels.Select(pixel => (pixel / 255d) * 0.99 + 0.01)]);
+        foreach (var image in imagesTrain)
+        {
+            Vector inputLayer = new([.. image.Pixels.Select(pixel => (pixel / 255d) * 0.99 + 0.01)]);
 
-        Vector target = new([.. Enumerable.Repeat(0.01, 10)]);
-        target.Data[image.Label] = 0.99;
+            Vector target = new([.. Enumerable.Repeat(0.01, 10)]);
+            target.Data[image.Label] = 0.99;
 
-        // Train the neural network with the input and target vectors
-        neuralNetwork.Train(inputLayer, target);
+            // Train the neural network with the input and target vectors
+            neuralNetwork.Train(inputLayer, target);
+        }
     }
 
     int score = 0;
@@ -107,24 +111,26 @@ Console.WriteLine("-----------------------------------");
     Console.WriteLine($"Neural Network Performance: {(double)score / imagesTest.Length * 100}%");
     Console.WriteLine("Number of training images: " + imagesTrain.Length);
     Console.WriteLine("Number of test images: " + imagesTest.Length);
+    Console.WriteLine("Number of epochs: " + epochs);
 
 
     // Debug output:
 
     // Training on MNIST dataset...
-    // Label: 6, Predicted: 6[0.955882994981059], Second predicted: 0[0.12189459033404468]
-    // Label: 7, Predicted: 7[0.3946532539864826], Second predicted: 4[0.3677020499898069]
-    // Label: 4, Predicted: 4[0.9144174484198532], Second predicted: 6[0.1974267345265578]
-    // Label: 6, Predicted: 6[0.9164043611348797], Second predicted: 8[0.06587538978638877]
-    // Label: 8, Predicted: 8[0.5363713585449249], Second predicted: 1[0.15185488593922786]
-    // Label: 0, Predicted: 0[0.7446000645261514], Second predicted: 6[0.09581561613894216]
-    // Label: 7, Predicted: 9[0.4992501338446011], Second predicted: 7[0.4091378670571419]
-    // Label: 8, Predicted: 8[0.7189113452141703], Second predicted: 9[0.08975912587353937]
-    // Label: 3, Predicted: 3[0.8355254656526319], Second predicted: 1[0.12373015597529241]
-    // Label: 1, Predicted: 1[0.7695925616631747], Second predicted: 8[0.16279460738422336]
+    // Label: 6, Predicted: 6[0.9555110138579607], Second predicted: 0[0.11422946053018113]
+    // Label: 7, Predicted: 7[0.6107789717181917], Second predicted: 9[0.1895928206857955]
+    // Label: 4, Predicted: 4[0.9326265652089964], Second predicted: 6[0.0944038564612339]
+    // Label: 6, Predicted: 6[0.9228503677473069], Second predicted: 1[0.05494633682019927]
+    // Label: 8, Predicted: 8[0.6673127070837434], Second predicted: 9[0.13679885627027302]
+    // Label: 0, Predicted: 0[0.8602105693016026], Second predicted: 6[0.10442636093935491]
+    // Label: 7, Predicted: 9[0.6269751657233196], Second predicted: 7[0.5212717658121823]
+    // Label: 8, Predicted: 8[0.8776229678775155], Second predicted: 9[0.14153030418956095]
+    // Label: 3, Predicted: 3[0.8819434444588291], Second predicted: 1[0.06707529002523892]
+    // Label: 1, Predicted: 1[0.8303102184641233], Second predicted: 2[0.07459432168779988]
     // Neural Network Performance: 90%
     // Number of training images: 90
     // Number of test images: 10
+    // Number of epochs: 2
 }
 
 Console.WriteLine("Hello, World!");
