@@ -31,9 +31,9 @@ https://pjreddie.com/projects/mnist-in-csv/
     // Number of epochs: 5
 ```
 
-### How neural-network see digits
+### Visualization of how neural-network see digits
 After training the neural network on 90 images, it stores information about them as images:
-![how neural network see images](/doc/how-neural-network-see-digits.png)
+![how neural network see digits](/doc/how-neural-network-see-digits.png)
 
 ### Refs: 
 - Make Your Own Neural Network: Rashid, Tariq

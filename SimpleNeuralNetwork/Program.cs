@@ -132,6 +132,8 @@ Console.WriteLine("-----------------------------------");
     // Number of test images: 10
     // Number of epochs: 5
 
+
+    // Generate backquery images(to visualize what the neural network "thinks" about each digit)
     {
         var outputBackQueryPath = "scripts/output_backquery.dat";
 
