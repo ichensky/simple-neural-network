@@ -1,7 +1,7 @@
 # Simple neural network in C# 
 
 A simple neural network has one `hidden layer`. 
-In this example, it is trained on MNIST images to be able to recognize digits.
+In this example, it is trained on MNIST images to be able to recognize hand-written digits.
 
 MNIST image stored in csv
 [7, 0, 0,...., 198, 255,...0,]
