@@ -59,8 +59,10 @@ Console.WriteLine("-----------------------------------");
     var images = lines.Select(line => new MnistImage(line));
 
     // Split into training and test sets
-    var imagesTrain = images.Take(lines.Length - 10).ToArray();
-    var imagesTest = images.Skip(lines.Length - 10).ToArray();
+    var numberOfTestImages = 10;
+    var numberOfTrainImages = lines.Length - numberOfTestImages;
+    var imagesTrain = images.Take(numberOfTrainImages).ToArray();
+    var imagesTest = images.Skip(numberOfTrainImages).ToArray();
 
 
     Random rand = new(123);
@@ -103,6 +105,9 @@ Console.WriteLine("-----------------------------------");
         Console.WriteLine($"Label: {image.Label}, Predicted: {ordered[0].index}[{ordered[0].value}], Second predicted: {ordered[1].index}[{ordered[1].value}]");
     }
     Console.WriteLine($"Neural Network Performance: {(double)score / imagesTest.Length * 100}%");
+    Console.WriteLine("Number of training images: " + imagesTrain.Length);
+    Console.WriteLine("Number of test images: " + imagesTest.Length);
+
 
     // Debug output:
 
@@ -118,6 +123,8 @@ Console.WriteLine("-----------------------------------");
     // Label: 3, Predicted: 3[0.8479082152724998], Second predicted: 1[0.09340656902348322]
     // Label: 1, Predicted: 1[0.8059728365313362], Second predicted: 8[0.18865839000648169]
     // Neural Network Performance: 80%
+    // Number of training images: 90
+    // Number of test images: 10
 }
 
 Console.WriteLine("Hello, World!");
