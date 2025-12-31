@@ -14,17 +14,20 @@ https://pjreddie.com/projects/mnist-in-csv/
     // Debug output:
 
     // Training on MNIST dataset...
-    // Label: 6, Predicted: 6[0.9753125867541408], Second predicted: 4[0.12607054094009107]
-    // Label: 7, Predicted: 4[0.4068498051873584], Second predicted: 7[0.39002865329624276]
-    // Label: 4, Predicted: 4[0.9376553441117896], Second predicted: 6[0.1813234321882868]
-    // Label: 6, Predicted: 6[0.9758362393808847], Second predicted: 4[0.04960161526202514]
-    // Label: 8, Predicted: 8[0.48849705799545357], Second predicted: 1[0.16744527168546258]
-    // Label: 0, Predicted: 0[0.7661083439674404], Second predicted: 6[0.13836600786077213]
-    // Label: 7, Predicted: 9[0.4626150821354045], Second predicted: 7[0.33149310403425697]
-    // Label: 8, Predicted: 8[0.697151813098993], Second predicted: 1[0.07297951557083256]
-    // Label: 3, Predicted: 3[0.8479082152724998], Second predicted: 1[0.09340656902348322]
-    // Label: 1, Predicted: 1[0.8059728365313362], Second predicted: 8[0.18865839000648169]
-    // Neural Network Performance: 80%
+    // Label: 6, Predicted: 6[0.9565385366964735], Second predicted: 0[0.08471559056467289]
+    // Label: 7, Predicted: 7[0.7782230846342505], Second predicted: 4[0.10997378352093976]
+    // Label: 4, Predicted: 4[0.9590104713170882], Second predicted: 9[0.08107556885578783]
+    // Label: 6, Predicted: 6[0.9195931776377313], Second predicted: 1[0.06751671433028496]
+    // Label: 8, Predicted: 8[0.6958355798493969], Second predicted: 9[0.10310759896822407]
+    // Label: 0, Predicted: 0[0.9131043963800642], Second predicted: 6[0.06941072092591712]
+    // Label: 7, Predicted: 7[0.7323817320259772], Second predicted: 9[0.6356787895520682]
+    // Label: 8, Predicted: 8[0.9521698144542837], Second predicted: 9[0.0916935525540241]
+    // Label: 3, Predicted: 3[0.929344564561091], Second predicted: 9[0.07426378958115883]
+    // Label: 1, Predicted: 1[0.8501468932454387], Second predicted: 4[0.08364124013770946]
+    // Neural Network Performance: 100%
+    // Number of training images: 90
+    // Number of test images: 10
+    // Number of epochs: 5
 ```
 
 ### Refs: 

@@ -70,7 +70,7 @@ Console.WriteLine("-----------------------------------");
     var num = rand.NextDouble();
 
 
-    const int epochs = 2;
+    const int epochs = 5;
     const double learningRate = 0.2;
     const int inputNodesCount = 784;
     const int hiddenNodesCount = 100;
@@ -117,20 +117,20 @@ Console.WriteLine("-----------------------------------");
     // Debug output:
 
     // Training on MNIST dataset...
-    // Label: 6, Predicted: 6[0.9555110138579607], Second predicted: 0[0.11422946053018113]
-    // Label: 7, Predicted: 7[0.6107789717181917], Second predicted: 9[0.1895928206857955]
-    // Label: 4, Predicted: 4[0.9326265652089964], Second predicted: 6[0.0944038564612339]
-    // Label: 6, Predicted: 6[0.9228503677473069], Second predicted: 1[0.05494633682019927]
-    // Label: 8, Predicted: 8[0.6673127070837434], Second predicted: 9[0.13679885627027302]
-    // Label: 0, Predicted: 0[0.8602105693016026], Second predicted: 6[0.10442636093935491]
-    // Label: 7, Predicted: 9[0.6269751657233196], Second predicted: 7[0.5212717658121823]
-    // Label: 8, Predicted: 8[0.8776229678775155], Second predicted: 9[0.14153030418956095]
-    // Label: 3, Predicted: 3[0.8819434444588291], Second predicted: 1[0.06707529002523892]
-    // Label: 1, Predicted: 1[0.8303102184641233], Second predicted: 2[0.07459432168779988]
-    // Neural Network Performance: 90%
+    // Label: 6, Predicted: 6[0.9565385366964735], Second predicted: 0[0.08471559056467289]
+    // Label: 7, Predicted: 7[0.7782230846342505], Second predicted: 4[0.10997378352093976]
+    // Label: 4, Predicted: 4[0.9590104713170882], Second predicted: 9[0.08107556885578783]
+    // Label: 6, Predicted: 6[0.9195931776377313], Second predicted: 1[0.06751671433028496]
+    // Label: 8, Predicted: 8[0.6958355798493969], Second predicted: 9[0.10310759896822407]
+    // Label: 0, Predicted: 0[0.9131043963800642], Second predicted: 6[0.06941072092591712]
+    // Label: 7, Predicted: 7[0.7323817320259772], Second predicted: 9[0.6356787895520682]
+    // Label: 8, Predicted: 8[0.9521698144542837], Second predicted: 9[0.0916935525540241]
+    // Label: 3, Predicted: 3[0.929344564561091], Second predicted: 9[0.07426378958115883]
+    // Label: 1, Predicted: 1[0.8501468932454387], Second predicted: 4[0.08364124013770946]
+    // Neural Network Performance: 100%
     // Number of training images: 90
     // Number of test images: 10
-    // Number of epochs: 2
+    // Number of epochs: 5
 }
 
 Console.WriteLine("Hello, World!");
