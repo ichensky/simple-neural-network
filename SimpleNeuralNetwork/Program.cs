@@ -131,6 +131,24 @@ Console.WriteLine("-----------------------------------");
     // Number of training images: 90
     // Number of test images: 10
     // Number of epochs: 5
+
+    {
+        var outputBackQueryPath = "scripts/output_backquery.dat";
+
+        await File.WriteAllTextAsync(outputBackQueryPath, string.Empty);
+
+        for (int i = 0; i < 10; i++)
+        {
+            Vector target = new([.. Enumerable.Repeat(0.01, 10)]);
+            target.Data[i] = 0.99;
+
+            var image = neuralNetwork.BackQuery(target);
+            var chanks = image.Data.Chunk((int)Math.Sqrt(image.Data.Length)).ToArray();
+            var dataLines = chanks.Select(row => string.Join(' ', row)).Reverse();
+
+            await File.AppendAllLinesAsync(outputBackQueryPath, dataLines);
+        }
+    }
 }
 
 Console.WriteLine("Hello, World!");

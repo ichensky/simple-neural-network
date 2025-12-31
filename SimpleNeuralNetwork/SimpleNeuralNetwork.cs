@@ -51,6 +51,29 @@ public class SimpleNeuralNetwork(Random rand, int inputNodesCount, int hiddenNod
         weightsInputHidden.Add(weightsInputHiddenDelta);
     }
 
+    public Vector BackQuery(Vector targets)
+    {
+        // Backward pass
+        Vector finalOutputs = targets;
+        Vector finalInputs = finalOutputs.ApplyFunctionElementWise(ActivationFunctionInverse);
+
+        Vector hiddenOutputs = weightsHiddenOutput.Transpose().Dot(finalInputs);
+        hiddenOutputs -= hiddenOutputs.Data.Min();
+        hiddenOutputs /= hiddenOutputs.Data.Max();
+        hiddenOutputs *= 0.98;
+        hiddenOutputs += 0.01;
+
+        Vector hiddenInputs = hiddenOutputs.ApplyFunctionElementWise(ActivationFunctionInverse);
+
+        Vector inputs = weightsInputHidden.Transpose().Dot(hiddenInputs);
+        inputs -= inputs.Data.Min();
+        inputs /= inputs.Data.Max();
+        inputs *= 0.98;
+        inputs += 0.01;
+
+        return inputs;
+    }
+
     /// <summary>
     /// Calculates weight deltas for backpropagation
     /// see https://en.wikipedia.org/wiki/Backpropagation
@@ -71,6 +94,8 @@ public class SimpleNeuralNetwork(Random rand, int inputNodesCount, int hiddenNod
     private static double LossFunctionAbsoluteError(double output, double target) => target - output;
 
     private static double ActivationFunction(double node) => Sigmoid(node);
+
+    private static double ActivationFunctionInverse(double output) => Math.Log(output / (1 - output));
 
     private static double[][] InitializeWeightsMatrix(Random rand, int rows, int cols)
     {

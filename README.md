@@ -7,6 +7,7 @@ MNIST image stored in csv
 [7, 0, 0,...., 198, 255,...0,]
 
 where 7 - represents image stored in the csv line
+    0, 198, 255, ... - grayscale values from 0 to 255
 
 https://pjreddie.com/projects/mnist-in-csv/
 
@@ -29,6 +30,10 @@ https://pjreddie.com/projects/mnist-in-csv/
     // Number of test images: 10
     // Number of epochs: 5
 ```
+
+### How neural-network see digits
+After training the neural network on 90 images, it stores information about them as images:
+![how neural network see images](/doc/how-neural-network-see-digits.png)
 
 ### Refs: 
 - Make Your Own Neural Network: Rashid, Tariq

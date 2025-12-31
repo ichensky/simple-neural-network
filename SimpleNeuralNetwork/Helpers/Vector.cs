@@ -57,6 +57,66 @@ public class Vector(double[] data)
         return new Vector(output);
     }
 
+    /// <summary>
+    /// [2, 2, 2] - 1 = [1, 1, 1]
+    /// </summary>
+    public static Vector operator -(Vector vector, double value)
+    {
+        double[] output = new double[vector.Data.Length];
+
+        for (int i = 0; i < vector.Data.Length; i++)
+        {
+            output[i] = vector.Data[i] - value;
+        }
+
+        return new Vector(output);
+    }
+
+    /// <summary>
+    /// [2, 2, 2] + 1 = [3, 3, 3]
+    /// </summary>
+    public static Vector operator +(Vector vector, double value)
+    {
+        double[] output = new double[vector.Data.Length];
+
+        for (int i = 0; i < vector.Data.Length; i++)
+        {
+            output[i] = vector.Data[i] + value;
+        }
+
+        return new Vector(output);
+    }
+
+    /// <summary>
+    /// [2, 2, 2] / 2 = [1, 1, 1]
+    /// </summary>
+    public static Vector operator /(Vector vector, double value)
+    {
+        double[] output = new double[vector.Data.Length];
+
+        for (int i = 0; i < vector.Data.Length; i++)
+        {
+            output[i] = vector.Data[i] / value;
+        }
+
+        return new Vector(output);
+    }
+
+    /// <summary>
+    /// [2, 2, 2] * 2 = [4, 4, 4]
+    /// </summary>
+    public static Vector operator *(Vector vector, double value)
+    {
+        double[] output = new double[vector.Data.Length];
+
+        for (int i = 0; i < vector.Data.Length; i++)
+        {
+            output[i] = vector.Data[i] * value;
+        }
+
+        return new Vector(output);
+    }
+
 
     /// <summary>
     /// Example: [1, 2, 3] . [4, 5, 6] = 1*4 + 2*5 + 3*6 = 32
