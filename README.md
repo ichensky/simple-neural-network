@@ -1,5 +1,25 @@
 # Simple neural network in C# 
 
+Simple neural network is the construction of a [Multilayer Perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron), which is a classic type of Feedforward Artificial Neural Network.
+
+The architecture is consists of three layers:
+
+`Input Layer`: Receives the raw data (pixels from handwritten digits).
+
+`Hidden Layer`: Processes the signals with weights and an activation function.
+
+`Output Layer`: Produces the final classification (e.g., identifying which digit 0–9 is shown).
+
+#### Key Characteristics of the Network:
+`Fully Connected`: Every node in one layer is connected to every node in the next layer.
+
+`Activation Function`: Used the Sigmoid function to introduce non-linearity into the model.
+
+`Learning Mechanism`: It utilizes Backpropagation to calculate errors and Gradient Descent to update the weights between nodes.
+
+
+
+
 A simple neural network has one `hidden layer`. 
 In this example, it is trained on MNIST images to be able to recognize hand-written digits.
 
