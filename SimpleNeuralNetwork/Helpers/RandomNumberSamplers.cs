@@ -1,4 +1,6 @@
-public static class Helpers
+namespace SimpleNeuralNetwork.Helpers;
+
+public static class RandomNumberSamplers
 {
     /// <summary>
     /// Box-Muller Transform to get a Normal Distribution
@@ -16,10 +18,5 @@ public static class Helpers
         double z1 = part1 * Math.Sin(part2);
 
         return (z0 * deviation + mean, z1 * deviation + mean);
-    }
-
-    public static double Sigmoid(double value)
-    {
-        return 1 / (1 + Math.Exp(-value));
     }
 }

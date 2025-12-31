@@ -1,4 +1,8 @@
-using static Helpers;
+using static SimpleNeuralNetwork.Helpers.LogisticFunctions;
+using static SimpleNeuralNetwork.Helpers.RandomNumberSamplers;
+using SimpleNeuralNetwork.Helpers;
+
+namespace SimpleNeuralNetwork;
 
 public class SimpleNeuralNetwork(Random rand, int inputNodesCount, int hiddenNodesCount, int outputNodesCount, double learningRate)
 {

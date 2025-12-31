@@ -1,3 +1,5 @@
+namespace SimpleNeuralNetwork.Helpers;
+
 public class Matrix(double[][] data)
 {
     public double[][] Data { get; } = data;
@@ -38,7 +40,7 @@ public class Matrix(double[][] data)
     /// </summary>
     public Vector Dot(Vector vector)
     {
-        if(this.Data[0].Length != vector.Data.Length)
+        if (this.Data[0].Length != vector.Data.Length)
         {
             throw new ArgumentException("Matrix columns must match vector length for dot product.");
         }
@@ -84,7 +86,7 @@ public class Matrix(double[][] data)
             }
         }
     }
-    
+
     /// <summary>
     /// Example: [[1, 2],        
     ///           [3, 4]]  * 2 =

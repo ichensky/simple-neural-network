@@ -1,4 +1,6 @@
-﻿
+﻿using SimpleNeuralNetwork;
+using SimpleNeuralNetwork.Helpers;
+
 // Simple test of the SimpleNeuralNetwork
 {
     Random rand = new(123);
@@ -12,7 +14,7 @@
     Vector targets = new([0.5, 0.1, 0.9]);
 
     // Initialize the neural network with random weights
-    var neuralNetwork = new SimpleNeuralNetwork(rand, inputNodesCount, hiddenNodesCount, outputNodesCount, learningRate);
+    var neuralNetwork = new SimpleNeuralNetwork.SimpleNeuralNetwork(rand, inputNodesCount, hiddenNodesCount, outputNodesCount, learningRate);
     neuralNetwork.InitializeWeights();
 
     // Query the neural network output vector before training
@@ -71,7 +73,7 @@ Console.WriteLine("-----------------------------------");
     int hiddenNodesCount = 100;
     int outputNodesCount = 10;
 
-    var neuralNetwork = new SimpleNeuralNetwork(rand, inputNodesCount, hiddenNodesCount, outputNodesCount, learningRate);
+    var neuralNetwork = new SimpleNeuralNetwork.SimpleNeuralNetwork(rand, inputNodesCount, hiddenNodesCount, outputNodesCount, learningRate);
     neuralNetwork.InitializeWeights();
 
     foreach (var image in imagesTrain)
@@ -85,6 +87,7 @@ Console.WriteLine("-----------------------------------");
         neuralNetwork.Train(inputLayer, target);
     }
 
+    int score = 0;
     foreach (var image in imagesTest)
     {
         Vector inputLayer = new([.. image.Pixels.Select(pixel => (pixel / 255d) * 0.99 + 0.01)]);
@@ -92,9 +95,14 @@ Console.WriteLine("-----------------------------------");
         // Query the neural network output vector
         Vector result = neuralNetwork.Query(inputLayer);
         var ordered = result.Data.Select((value, index) => (value, index)).OrderByDescending(tuple => tuple.value).ToArray();
+        if (ordered[0].index == image.Label)
+        {
+            score++;
+        }
 
         Console.WriteLine($"Label: {image.Label}, Predicted: {ordered[0].index}[{ordered[0].value}], Second predicted: {ordered[1].index}[{ordered[1].value}]");
     }
+    Console.WriteLine($"Neural Network Performance: {(double)score / imagesTest.Length * 100}%");
 
     // Debug output:
 
@@ -109,24 +117,7 @@ Console.WriteLine("-----------------------------------");
     // Label: 8, Predicted: 8[0.697151813098993], Second predicted: 1[0.07297951557083256]
     // Label: 3, Predicted: 3[0.8479082152724998], Second predicted: 1[0.09340656902348322]
     // Label: 1, Predicted: 1[0.8059728365313362], Second predicted: 8[0.18865839000648169]
+    // Neural Network Performance: 80%
 }
 
 Console.WriteLine("Hello, World!");
-
-
-/// <summary>
-/// https://pjreddie.com/projects/mnist-in-csv/
-/// </summary>
-class MnistImage
-{
-    public int Label { get; private set; }
-
-    public byte[] Pixels { get; private set; }
-
-    public MnistImage(string csvData)
-    {
-        string[] arr = csvData.Split(',');
-        Label = int.Parse(arr[0]);
-        Pixels = [.. arr.Skip(1).Select(str => byte.Parse(str))];
-    }
-}

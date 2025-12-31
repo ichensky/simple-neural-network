@@ -1,3 +1,5 @@
+namespace SimpleNeuralNetwork.Helpers;
+
 public class Vector(double[] data)
 {
     public double[] Data { get; } = data;
@@ -117,11 +119,11 @@ public class Vector(double[] data)
 
         return new Matrix(result);
     }
-    
+
     public Vector ApplyFunctionElementWise(Func<double, double> func)
     {
         double[] output = new double[Data.Length];
-        
+
         for (int i = 0; i < Data.Length; i++)
         {
             output[i] = func(this.Data[i]);
