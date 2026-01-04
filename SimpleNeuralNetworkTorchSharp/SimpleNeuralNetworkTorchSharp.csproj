@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GnuPlotWrapper" Version="1.0.1" />
+    <PackageReference Include="GnuPlotWrapper" Version="1.0.0" />
+    <PackageReference Include="TorchSharp" Version="0.105.2" />
+    <PackageReference Include="TorchSharp-cpu" Version="0.105.2" />
   </ItemGroup>
 
 </Project>

@@ -53,7 +53,12 @@ https://pjreddie.com/projects/mnist-in-csv/
 
 ### Visualization of how neural-network see digits
 After training the neural network on 90 images, it stores information about them as images:
+
 ![how neural network see digits](/doc/how-neural-network-see-digits.png)
+
+Training loss: 
+
+![training loss](/doc/training-loss.png)
 
 ### Refs: 
 - Make Your Own Neural Network: Rashid, Tariq

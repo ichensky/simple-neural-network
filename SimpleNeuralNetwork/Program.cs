@@ -55,7 +55,7 @@ Console.WriteLine("-----------------------------------");
 // Simple test of the SimpleNeuralNetwork on MNIST dataset
 {
     Console.WriteLine("Training on MNIST dataset...");
-    var pathData = "data/mnist_train_100.csv";
+    var pathData = "../../../../data/mnist_train_100.csv";
     var lines = await File.ReadAllLinesAsync(pathData);
     var images = lines.Select(line => new MnistImage(line));
 
