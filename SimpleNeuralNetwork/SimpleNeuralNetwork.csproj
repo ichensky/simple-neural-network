@@ -13,9 +13,7 @@
       </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="scripts\**\*.*">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
+    <PackageReference Include="GnuPlotWrapper" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

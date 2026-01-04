@@ -1,4 +1,5 @@
-﻿using SimpleNeuralNetwork;
+﻿using GnuPlotWrapper;
+using SimpleNeuralNetwork;
 using SimpleNeuralNetwork.Helpers;
 
 // Simple test of the SimpleNeuralNetwork
@@ -135,9 +136,7 @@ Console.WriteLine("-----------------------------------");
 
     // Generate backquery images(to visualize what the neural network "thinks" about each digit)
     {
-        var outputBackQueryPath = "scripts/output_backquery.dat";
-
-        await File.WriteAllTextAsync(outputBackQueryPath, string.Empty);
+        var imagesDataLines = new List<string>();
 
         for (int i = 0; i < 10; i++)
         {
@@ -145,11 +144,11 @@ Console.WriteLine("-----------------------------------");
             target.Data[i] = 0.99;
 
             var image = neuralNetwork.BackQuery(target);
-            var chanks = image.Data.Chunk((int)Math.Sqrt(image.Data.Length)).ToArray();
-            var dataLines = chanks.Select(row => string.Join(' ', row)).Reverse();
 
-            await File.AppendAllLinesAsync(outputBackQueryPath, dataLines);
-        }
+            var gnuPlot = new GnuPlot();
+            gnuPlot.Start();
+            await gnuPlot.ExecuteAsync(GnuPlotHelpers.ConvertToGrayScaleMatrixImageScript(image.Data).AsMemory());
+        }        
     }
 }
 
