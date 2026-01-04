@@ -56,7 +56,7 @@ After training the neural network on 90 images, it stores information about them
 
 ![how neural network see digits](/doc/how-neural-network-see-digits.png)
 
-Training loss: 
+### Training loss 
 
 ![training loss](/doc/training-loss.png)
 
