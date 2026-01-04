@@ -31,6 +31,10 @@ where 7 - represents image stored in the csv line
 
 https://pjreddie.com/projects/mnist-in-csv/
 
+Number of training images: 90
+Number of test images: 10
+Number of epochs: 5
+Performance: 100%
 ```csharp
     // Debug output:
 
@@ -51,6 +55,29 @@ https://pjreddie.com/projects/mnist-in-csv/
     // Number of epochs: 5
 ```
 
+Number of training images: 59000
+Number of test images: 1000
+Number of epochs: 3
+Performance: 97.4%
+```csharp
+// Label: 8, Predicted: 8[0.99999976], Second predicted: 2[4.4215118E-05]
+// Label: 9, Predicted: 9[0.9998324], Second predicted: 7[0.00010894189]
+// Label: 2, Predicted: 2[0.9999881], Second predicted: 5[0.0001921707]
+// Label: 9, Predicted: 9[0.9991196], Second predicted: 7[0.00014359904]
+// Label: 5, Predicted: 5[1], Second predicted: 9[3.5807866E-09]
+// Label: 1, Predicted: 1[0.9965064], Second predicted: 7[7.580602E-05]
+// Label: 8, Predicted: 8[0.999998], Second predicted: 1[3.4516643E-06]
+// Label: 3, Predicted: 3[0.99999917], Second predicted: 8[0.00014642277]
+// Label: 5, Predicted: 5[1], Second predicted: 3[2.5686325E-07]
+// Label: 6, Predicted: 6[0.99985874], Second predicted: 5[0.00022567397]
+// Label: 8, Predicted: 8[0.9999994], Second predicted: 5[1.3962545E-05]
+// Neural Network Performance: 97.39999999999999%
+// Number of training images: 59000
+// Number of test images: 1000
+// Number of epochs: 3
+```
+
+
 ### Visualization of how neural-network see digits
 After training the neural network on 90 images, it stores information about them as images:
 
@@ -58,7 +85,17 @@ After training the neural network on 90 images, it stores information about them
 
 ### Training loss 
 
+
+Number of training images: 90
+Number of test images: 10
+Number of epochs: 3
 ![training loss](/doc/training-loss.png)
+
+
+Number of training images: 59000
+Number of test images: 1000
+Number of epochs: 3
+![training-loss-3epochs-59000-images](/doc/training-loss-3epochs-59000-images.png)
 
 
 ### Projects
