@@ -1,6 +1,6 @@
 # Simple neural network in C# 
 
-Simple neural network is the construction of a [Multilayer Perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron), which is a classic type of Feedforward Artificial Neural Network.
+Simple neural network is the construction of a [Multilayer Perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron) (MLP), which is a classic type of Feedforward Artificial Neural Network.
 
 The architecture is consists of three layers:
 
@@ -59,6 +59,11 @@ After training the neural network on 90 images, it stores information about them
 Training loss: 
 
 ![training loss](/doc/training-loss.png)
+
+
+### Projects
+SimpleNeuralNetwork - impelementation of the MLP without third-party libraries
+SimpleNeuralNetworkTorchSharp - impelementation of the MLP with `TorchSharp` library
 
 ### Refs: 
 - Make Your Own Neural Network: Rashid, Tariq
