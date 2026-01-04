@@ -62,8 +62,8 @@ Training loss:
 
 
 ### Projects
-SimpleNeuralNetwork - impelementation of the MLP without third-party libraries
-SimpleNeuralNetworkTorchSharp - impelementation of the MLP with `TorchSharp` library
+`SimpleNeuralNetwork` - impelementation of the MLP without third-party libraries
+`SimpleNeuralNetworkTorchSharp` - impelementation of the MLP with `TorchSharp` library
 
 ### Refs: 
 - Make Your Own Neural Network: Rashid, Tariq
