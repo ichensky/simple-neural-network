@@ -2,6 +2,10 @@
 using SimpleNeuralNetworkTorchSharp;
 using TorchSharp;
 
+var isCudaAvailable = torch.cuda.is_available();
+Console.WriteLine("Is CUDA available: " + isCudaAvailable);
+
+
 // var pathData = "../../../../data/mnist_train_100.csv";
 var pathData = "/home/john/Downloads/mnist_train.csv/mnist_train.csv";
 var lines = await File.ReadAllLinesAsync(pathData);

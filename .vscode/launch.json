@@ -11,6 +11,12 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/SimpleNeuralNetworkTorchSharp/SimpleNeuralNetworkTorchSharp.csproj"
+        },
+        {
+            "name": "C#: Launch Pattern1010",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Pattern1010/Pattern1010.csproj"
         }
     ]
 }
