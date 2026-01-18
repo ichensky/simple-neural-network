@@ -125,7 +125,7 @@ public class Generator : Module<Tensor, Tensor>
         return loss;
     }
 
-    public IList<float> TrainingLoss => [];
+    public IList<float> TrainingLoss { get; } = [];
 
     public override Tensor forward(Tensor input) => model.forward(input);
 }
@@ -186,7 +186,7 @@ public class Discriminator : Module<Tensor, Tensor>
         return loss;
     }
 
-    public IList<float> TrainingLoss => [];
+    public IList<float> TrainingLoss { get; } = [];
 
     public override Tensor forward(Tensor input) => model.forward(input);
 }

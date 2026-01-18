@@ -9,8 +9,10 @@ using Generator = HandwrittenDigits.Networks.Generator;
 var pathData = "/home/john/Downloads/mnist_train.csv/mnist_train.csv";
 var lines = await File.ReadAllLinesAsync(pathData);
 var images = lines.Select(line => new MnistImage(line))
-    //.ToArray();
-    .Take(10_000).ToArray();
+    .ToArray();
+    //  .Take(1_000).ToArray();
+
+var dataset = new MnistDataSet(images);
 
 
 
@@ -18,13 +20,12 @@ var images = lines.Select(line => new MnistImage(line))
 // using var imagePlot1 = new GnuPlot();
 // imagePlot1.Start();
 
-// for(int i =0;i<100;i++)
+// foreach(var img in dataset)
 // {
-// await imagePlot1.ExecuteAsync(GnuPlotHelpers
-//     .ShowImage(images[i].Pixels, "image").AsMemory());
+//     await imagePlot1.ExecuteAsync(GnuPlotHelpers
+//         .ShowImage(img.imageValues.data<float>().ToArray(), "image").AsMemory());
 //     await Task.Delay(1000);
 // }
-
 
 
 var epochs = 4;
@@ -40,7 +41,7 @@ for (int epoch = 0; epoch < epochs; epoch++)
     im = -1;
     Console.WriteLine($"Epoch {epoch + 1}/{epochs}");
 
-    foreach (var trainImage in images)
+    foreach (var trainImage in dataset)
     {
         im++;
         if (im % (images.Length / 100) == 0)
@@ -50,7 +51,7 @@ for (int epoch = 0; epoch < epochs; epoch++)
 
 
         // Train Discriminator on real data
-        using var realData = torch.FloatTensor(trainImage.Pixels);
+        using var realData = trainImage.imageValues;
         using var lossReal = discriminator.Train(realData, realLabels);
 
         // Train Discriminator on fake data
@@ -71,7 +72,7 @@ for (int epoch = 0; epoch < epochs; epoch++)
 using var imagePlot = new GnuPlot();
 imagePlot.Start();
 
-for(int i =0;i<100;i++)
+for(int i =0;i<10;i++)
 {
     using var randomSeed = GenerateRandomSeed(100);
     using var outputTensor = generator.forward(randomSeed).detach();
@@ -79,7 +80,7 @@ for(int i =0;i<100;i++)
 
     await imagePlot.ExecuteAsync(GnuPlotHelpers
         .ShowImage(output, "image").AsMemory());
-    await Task.Delay(1000);
+    await Task.Delay(100);
 }
 
 
@@ -94,18 +95,16 @@ for(int i =0;i<100;i++)
 
 
 // Plot Discriminator training losses
-var discriminatorTrainingLosses = discriminator.TrainingLoss;
 using var discriminatorGnuPlotWrapper = new GnuPlot();
 discriminatorGnuPlotWrapper.Start();
 await discriminatorGnuPlotWrapper.ExecuteAsync(GnuPlotHelpers
-    .TrainingLosses(discriminatorTrainingLosses, "Discriminator Training Loss").AsMemory());
+    .TrainingLosses(discriminator.TrainingLoss, "Discriminator Training Loss").AsMemory());
 
 // Plot Generator training losses
-var generatorTrainingLosses = generator.TrainingLoss;
 using var generatorGnuPlotWrapper = new GnuPlot();
 generatorGnuPlotWrapper.Start();
 await generatorGnuPlotWrapper.ExecuteAsync(GnuPlotHelpers
-    .TrainingLosses(generatorTrainingLosses, "Generator Training Loss").AsMemory());
+    .TrainingLosses(generator.TrainingLoss, "Generator Training Loss").AsMemory());
 
 
 

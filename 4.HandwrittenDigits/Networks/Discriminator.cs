@@ -40,7 +40,7 @@ public class Discriminator : Module<Tensor, Tensor>
         using Tensor output = this.forward(input);
         Tensor loss = LossFunction.forward(output, target);
 
-        TrainingLoss.Add(loss.item<float>());
+        this.TrainingLoss.Add(loss.item<float>());
 
         optimizer.zero_grad();
         loss.backward();
@@ -49,8 +49,8 @@ public class Discriminator : Module<Tensor, Tensor>
         return loss;
     }
 
-    public IList<float> TrainingLoss => [];
-
+    public IList<float> TrainingLoss { get; } = [];
+    
     public override Tensor forward(Tensor input) => model.forward(input);
 }
 
