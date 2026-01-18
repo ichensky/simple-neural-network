@@ -23,6 +23,9 @@ public class Classifier: torch.nn.Module<torch.Tensor, torch.Tensor>
             torch.nn.Sigmoid()
         );
 
+        // Register the components of the model so that their parameters are included in this module's parameters
+        RegisterComponents();
+
         // MSELoss - Mean Squared Error Loss - good for regression
         // loss_function = torch.nn.MSELoss();
         // BCELoss - Binary Cross Entropy Loss - good for classification
@@ -30,7 +33,7 @@ public class Classifier: torch.nn.Module<torch.Tensor, torch.Tensor>
 
         // create optimiser, using simple stochastic gradient descent
         // optimiser = torch.optim.SGD(model.parameters(), 0.01);
-        optimiser = torch.optim.Adam(model.parameters());
+        optimiser = torch.optim.Adam(this.parameters());
     }
 
     public override torch.Tensor forward(torch.Tensor input)

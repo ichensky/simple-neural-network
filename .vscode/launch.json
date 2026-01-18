@@ -1,22 +1,28 @@
 {
     "configurations": [
         {
-            "name": "C#: Launch SimpleNeuralNetwork",
+            "name": "C#: Launch 1.SimpleNeuralNetwork",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/SimpleNeuralNetwork/SimpleNeuralNetwork.csproj"
+            "projectPath": "${workspaceFolder}/1.SimpleNeuralNetwork/SimpleNeuralNetwork.csproj"
         },
         {
-            "name": "C#: Launch SimpleNeuralNetworkTorchSharp",
+            "name": "C#: Launch 2.SimpleNeuralNetworkTorchSharp",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/SimpleNeuralNetworkTorchSharp/SimpleNeuralNetworkTorchSharp.csproj"
+            "projectPath": "${workspaceFolder}/2.SimpleNeuralNetworkTorchSharp/SimpleNeuralNetworkTorchSharp.csproj"
         },
         {
-            "name": "C#: Launch Pattern1010",
+            "name": "C#: Launch 3.Pattern1010",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}/Pattern1010/Pattern1010.csproj"
+            "projectPath": "${workspaceFolder}/3.Pattern1010/Pattern1010.csproj"
+        },
+        {
+            "name": "C#: Launch 4.HandwrittenDigits",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/4.HandwrittenDigits/HandwrittenDigits.csproj"
         }
     ]
 }

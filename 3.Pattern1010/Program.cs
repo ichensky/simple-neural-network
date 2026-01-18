@@ -35,14 +35,14 @@ for(int i =0;i< 10_000;i++)
 
 
 // Plot Discriminator training losses
-var discriminatorTrainingLosses = discriminator.GetTrainingLoss();
+var discriminatorTrainingLosses = discriminator.TrainingLoss;
 using var discriminatorGnuPlotWrapper = new GnuPlot();
 discriminatorGnuPlotWrapper.Start();
 await discriminatorGnuPlotWrapper.ExecuteAsync(GnuPlotHelpers
     .TrainingLosses(discriminatorTrainingLosses, "Discriminator Training Loss").AsMemory());
 
 // Plot Generator training losses
-var generatorTrainingLosses = generator.GetTrainingLoss();
+var generatorTrainingLosses = generator.TrainingLoss;
 using var generatorGnuPlotWrapper = new GnuPlot();
 generatorGnuPlotWrapper.Start();
 await generatorGnuPlotWrapper.ExecuteAsync(GnuPlotHelpers
@@ -76,9 +76,7 @@ Console.WriteLine("Exiting...");
 public class Generator : Module<Tensor, Tensor>
 {
     private readonly Sequential model;
-    private readonly MSELoss lossFunction;
     private readonly SGD optimizer;
-    private List<float> trainingLoss = [];
 
     public Generator() :base("Generator")
     {
@@ -89,8 +87,10 @@ public class Generator : Module<Tensor, Tensor>
             nn.Sigmoid()
         );
 
+        RegisterComponents();
+
         // stochastic gradient descent
-        optimizer = optim.SGD(model.parameters(), 0.01f);
+        optimizer = optim.SGD(this.parameters(), 0.01f);
     }
 
 
@@ -107,21 +107,15 @@ public class Generator : Module<Tensor, Tensor>
         return realData;
     }
 
-    public static Tensor GenerateRandom(int size)
-    {
-        Random random = new();
-
-        Tensor randomData = torch.rand(size);
-        return randomData;
-    }
+    public static Tensor GenerateRandom(int size) => torch.rand(size);
 
     public Tensor Train(Discriminator discriminator, Tensor input, Tensor target)
     {
-        Tensor geneartorOutput = model.forward(input);
+        Tensor geneartorOutput = this.forward(input);
         Tensor discriminatorOutput = discriminator.forward(geneartorOutput);
         Tensor loss = discriminator.LossFunction.forward(discriminatorOutput, target);
 
-        trainingLoss.Add(loss.item<float>());
+        TrainingLoss.Add(loss.item<float>());
 
         optimizer.zero_grad();
 
@@ -131,12 +125,9 @@ public class Generator : Module<Tensor, Tensor>
         return loss;
     }
 
-    public IList<float> GetTrainingLoss() => trainingLoss;
+    public IList<float> TrainingLoss => [];
 
-    public override Tensor forward(Tensor input)
-    {
-        return model.forward(input);
-    }
+    public override Tensor forward(Tensor input) => model.forward(input);
 }
 
 public class Discriminator : Module<Tensor, Tensor>
@@ -144,7 +135,6 @@ public class Discriminator : Module<Tensor, Tensor>
     private readonly Sequential model;
     private readonly MSELoss lossFunction;
     private readonly SGD optimizer;
-    private List<float> trainingLoss = [];
 
     public Discriminator() :base("Discriminator")
     {
@@ -155,11 +145,13 @@ public class Discriminator : Module<Tensor, Tensor>
             nn.Sigmoid()
         );
 
+        RegisterComponents();
+
         // mean squared error loss
         lossFunction = nn.MSELoss();
 
         // stochastic gradient descent
-        optimizer = optim.SGD(model.parameters(), 0.01f);
+        optimizer = optim.SGD(this.parameters(), 0.01f);
     }
 
     public MSELoss LossFunction => lossFunction;
@@ -177,20 +169,14 @@ public class Discriminator : Module<Tensor, Tensor>
         return realData;
     }
 
-    public static Tensor GenerateRandom(int size)
-    {
-        Random random = new();
-
-        Tensor randomData = torch.rand(size);
-        return randomData;
-    }
+    public static Tensor GenerateRandom(int size) => torch.rand(size);
 
     public Tensor Train(Tensor input, Tensor target)
     {
-        Tensor output = model.forward(input);
+        Tensor output = this.forward(input);
         Tensor loss = lossFunction.forward(output, target);
 
-        trainingLoss.Add(loss.item<float>());
+        TrainingLoss.Add(loss.item<float>());
 
         optimizer.zero_grad();
 
@@ -200,12 +186,9 @@ public class Discriminator : Module<Tensor, Tensor>
         return loss;
     }
 
-    public IList<float> GetTrainingLoss() => trainingLoss;
+    public IList<float> TrainingLoss => [];
 
-    public override Tensor forward(Tensor input)
-    {
-        return model.forward(input);
-    }
+    public override Tensor forward(Tensor input) => model.forward(input);
 }
 
 

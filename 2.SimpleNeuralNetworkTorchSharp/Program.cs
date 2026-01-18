@@ -10,11 +10,11 @@ Console.WriteLine("Is CUDA available: " + isCudaAvailable);
 var pathData = "/home/john/Downloads/mnist_train.csv/mnist_train.csv";
 var lines = await File.ReadAllLinesAsync(pathData);
 var images = lines.Select(line => new MnistImage(line))
-    .ToArray();
-    // .Take(000).ToArray();
+    // .ToArray();
+    .Take(1000).ToArray();
 
 // Split into training and test sets
-var numberOfTestImages = 1_000;
+var numberOfTestImages = images.Length / 10;
 var numberOfTrainImages = images.Length - numberOfTestImages;
 var imagesTrain = images.Take(numberOfTrainImages).ToArray();
 var imagesTest = images.Skip(numberOfTrainImages).ToArray();
