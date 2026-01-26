@@ -23,6 +23,12 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/4.HandwrittenDigits/HandwrittenDigits.csproj"
+        },
+        {
+            "name": "C#: Launch 5.HumanFaces",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/5.HumanFaces/HumanFaces.csproj"
         }
     ]
 }
