@@ -13,7 +13,7 @@ Example of original image, used for training:
 
 ![original image](doc/original_image.jpg)
 
-#### Generator generates images after training on 100 images, 4 epoch
+#### Generator generates images, just after training on 100 images, 4 epoch
 ![modified image](doc/modified_image_0.jpg)
 ![modified image](doc/modified_image_1.jpg)
 ![modified image](doc/modified_image_2.jpg)
