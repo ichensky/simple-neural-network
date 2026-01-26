@@ -25,3 +25,7 @@ Example of original image, used for training:
 ![modified image](doc/modified_image_8.jpg)
 ![modified image](doc/modified_image_9.jpg)
 
+
+#### Libs
+To load/save images used `SkiaSharp` library
+
