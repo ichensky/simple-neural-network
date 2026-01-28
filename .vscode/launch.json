@@ -29,6 +29,12 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/5.HumanFaces/HumanFaces.csproj"
+        },
+        {
+            "name": "C#: Launch 6.CNNSimpleNeuralNetwork",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/6.CNNSimpleNeuralNetwork/CNNSimpleNeuralNetwork.csproj"
         }
     ]
 }

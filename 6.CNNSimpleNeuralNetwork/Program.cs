@@ -10,8 +10,8 @@ Console.WriteLine("Is CUDA available: " + isCudaAvailable);
 var pathData = "/home/john/Downloads/mnist_train.csv/mnist_train.csv";
 var lines = await File.ReadAllLinesAsync(pathData);
 var images = lines.Select(line => new MnistImage(line))
-    // .ToArray();
-    .Take(1000).ToArray();
+    .ToArray();
+    // .Take(1000).ToArray();
 
 // Split into training and test sets
 var numberOfTestImages = images.Length / 10;
@@ -37,14 +37,20 @@ for (int epoch = 0; epoch < epochs; epoch++)
     Console.WriteLine($"Epoch {epoch + 1}/{epochs}");
     counter = 0;
 
-    foreach (var (label, imageValues, target) in trainDataset)
+    foreach ((int label, torch.Tensor? imageValues, torch.Tensor? target) in trainDataset)
     {
         counter++;
+
         if (counter % 1000 == 0)
         {
             Console.WriteLine($"  Training image {counter}/{trainDataset.Count}");
         }
-        classifier.Train(imageValues, target);
+
+        using torch.Tensor targetReshaped = target.reshape(1, -1);
+        using torch.Tensor imageValuesReshaped = imageValues.reshape(
+            // Batch size(one image in shape), channels(greyscale), height, width
+            1, 1, 28, 28);
+        classifier.Train(imageValuesReshaped, targetReshaped);
     }
 }
 
@@ -57,14 +63,16 @@ await gnuPlotWrapper.ExecuteAsync(GnuPlotHelpers.TrainingLosses(trainingLosses).
 
 int score = 0;
 var testDataset = new MnistDataSet(imagesTest);
-foreach (var (label, imageValues, target) in testDataset)
+foreach ((int label, torch.Tensor? imageValues, torch.Tensor? target) in testDataset)
 {
+    using var imageValuesReshaped = imageValues.reshape(
+        // Batch size(one image in shape), channels(greyscale), height, width
+        1, 1, 28, 28);
     torch.Tensor output = classifier
-        .forward(input: imageValues)
+        .forward(input: imageValuesReshaped)
         .detach();
 
-    var ordered = output.data<float>().Select((value, index) => (value, index))
-        .OrderByDescending(tuple => tuple.value).ToArray();
+    (float value, int index)[] ordered = [.. output.data<float>().Select((value, index) => (value, index)).OrderByDescending(tuple => tuple.value)];
 
     if (ordered[0].index == label)
     {
@@ -86,20 +94,21 @@ Console.WriteLine("Hello, World!");
 
 // Debug output:
 
-// Epoch 1/3
-// Epoch 2/3
-// Epoch 3/3
-// Label: 6, Predicted: 6[0.9234286], Second predicted: 1[0.10731403]
-// Label: 7, Predicted: 7[0.80352944], Second predicted: 4[0.09078009]
-// Label: 4, Predicted: 4[0.9545391], Second predicted: 9[0.17752466]
-// Label: 6, Predicted: 6[0.8726566], Second predicted: 1[0.069927305]
-// Label: 8, Predicted: 8[0.65236336], Second predicted: 1[0.08555014]
-// Label: 0, Predicted: 0[0.9159549], Second predicted: 6[0.032799874]
-// Label: 7, Predicted: 7[0.70220625], Second predicted: 9[0.37765577]
-// Label: 8, Predicted: 8[0.9184867], Second predicted: 5[0.069465496]
-// Label: 3, Predicted: 3[0.9165112], Second predicted: 4[0.031831652]
-// Label: 1, Predicted: 1[0.93227255], Second predicted: 4[0.08585575]
-// Neural Network Performance: 100%
-// Number of training images: 90
-// Number of test images: 10
+// Label: 6, Predicted: 6[0.9955011], Second predicted: 4[0.00067303877]
+// Label: 0, Predicted: 0[0.9972119], Second predicted: 2[0.0017542661]
+// Label: 7, Predicted: 7[0.9999666], Second predicted: 8[0.00061977905]
+// Label: 8, Predicted: 8[0.99999595], Second predicted: 9[0.0011516035]
+// Label: 9, Predicted: 9[0.9933734], Second predicted: 7[0.0031509795]
+// Label: 2, Predicted: 2[0.999483], Second predicted: 8[0.23067267]
+// Label: 9, Predicted: 9[0.98020875], Second predicted: 7[0.01554027]
+// Label: 5, Predicted: 5[0.9999161], Second predicted: 8[0.0006054291]
+// Label: 1, Predicted: 1[0.99913543], Second predicted: 7[0.0049620615]
+// Label: 8, Predicted: 8[0.9999995], Second predicted: 3[0.0006777902]
+// Label: 3, Predicted: 3[0.99992824], Second predicted: 8[0.0070069963]
+// Label: 5, Predicted: 5[0.99940765], Second predicted: 8[0.005628047]
+// Label: 6, Predicted: 6[0.99973315], Second predicted: 5[0.00039780219]
+// Label: 8, Predicted: 8[0.9896432], Second predicted: 9[0.0003862773]
+// Neural Network Performance: 98.61666666666666%
+// Number of training images: 54000
+// Number of test images: 6000
 // Number of epochs: 3
