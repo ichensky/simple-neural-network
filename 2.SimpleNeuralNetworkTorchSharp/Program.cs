@@ -19,12 +19,12 @@ var numberOfTrainImages = images.Length - numberOfTestImages;
 var imagesTrain = images.Take(numberOfTrainImages).ToArray();
 var imagesTest = images.Skip(numberOfTrainImages).ToArray();
 
-// var grayScaleMatrixImage = GnuPlowHelpers
-//     .ConvertToGrayScaleMatrixImageScript(imagesTrain.First().Pixels);
+// var grayScaleMatrixImage = GnuPlotHelpers
+//     .ShowImage(imagesTrain.First().Pixels, "First Training Image");
 
-// using var gnuPlotWrapper = new GnuPlot();
-// gnuPlotWrapper.Start();
-// await gnuPlotWrapper.ExecuteAsync(grayScaleMatrixImage.AsMemory());
+// using var gnuPlotWrapper1 = new GnuPlot();
+// gnuPlotWrapper1.Start();
+// await gnuPlotWrapper1.ExecuteAsync(grayScaleMatrixImage.AsMemory());
 
 
 const int epochs = 3;

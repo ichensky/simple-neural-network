@@ -36,10 +36,7 @@ public class Classifier: torch.nn.Module<torch.Tensor, torch.Tensor>
         optimiser = torch.optim.Adam(this.parameters());
     }
 
-    public override torch.Tensor forward(torch.Tensor input)
-    {
-        return model.forward(input);
-    }
+    public override torch.Tensor forward(torch.Tensor input) => model.forward(input);
 
     public void Train(torch.Tensor input, torch.Tensor target)
     {

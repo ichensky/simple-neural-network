@@ -25,7 +25,7 @@ public class GnuPlotHelpers
         return script.ToString();
     }
 
-    public static string ConvertToGrayScaleMatrixImageScript<T>(T[] imageData)
+    public static string ShowImage<T>(T[] imageData, string title)
     {
         var matrixSize = (int)Math.Sqrt(imageData.Length);
         var imageData2D = imageData
@@ -33,23 +33,23 @@ public class GnuPlotHelpers
             .Reverse()
             .ToArray();
 
-
         var script = new StringBuilder();
         script.Append(@$"
-        set pm3d map 
+        set title '{title}'
 
-        set palette gray
+        set palette gray negative
 
-        splot '-' matrix with image
+        plot '-' matrix with image
         ");
 
-        foreach (var row in imageData2D)
+        for (int i = 0; i < imageData2D.Length; i++)
         {
-            script.AppendLine(string.Join(' ', row));
+            script.AppendLine(string.Join(' ' , imageData2D[i]));
         }
 
         script.AppendLine("e");
 
-        return script.ToString();
+        return script.ToString();    
     }
+
 }
