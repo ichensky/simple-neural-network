@@ -35,6 +35,12 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/6.CNNSimpleNeuralNetwork/CNNSimpleNeuralNetwork.csproj"
+        },
+        {
+            "name": "C#: Launch 7.GANCNNHumanFaces",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/7.GANCNNHumanFaces/GANCNNHumanFaces.csproj"
         }
     ]
 }

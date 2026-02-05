@@ -1,0 +1,83 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6.CNNSimpleNeuralNetwork", "6.CNNSimpleNeuralNetwork", "{2935AAB7-D39F-3976-A4BF-BDCD89B94C01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.SimpleNeuralNetworkTorchSharp", "2.SimpleNeuralNetworkTorchSharp", "{91A2587E-A454-F7F5-22AF-6CBD952D1115}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Pattern1010", "3.Pattern1010", "{5275630C-974A-FB1B-ECBF-1B9DBF7756A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.SimpleNeuralNetwork", "1.SimpleNeuralNetwork", "{2E2AB1EA-14E8-35DC-EB20-8CBEC44FF36B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.HandwrittenDigits", "4.HandwrittenDigits", "{A136AF9A-6457-DA68-B6F5-7D36F95AB4C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.HumanFaces", "5.HumanFaces", "{97C42FB4-2322-83E9-C4B0-538BFB37A9F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7.CNNHumanFaces", "7.CNNHumanFaces", "{CC414259-5D95-3EB2-3689-F003D78E0DED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNNSimpleNeuralNetwork", "6.CNNSimpleNeuralNetwork\CNNSimpleNeuralNetwork.csproj", "{4007C3B2-B89B-4A91-9AF2-AEEED211B362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleNeuralNetworkTorchSharp", "2.SimpleNeuralNetworkTorchSharp\SimpleNeuralNetworkTorchSharp.csproj", "{6426AB0B-DFEA-3B5B-4E18-13CEEC13FFCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pattern1010", "3.Pattern1010\Pattern1010.csproj", "{C816624D-297C-8265-69D5-593B0BA5A4BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleNeuralNetwork", "1.SimpleNeuralNetwork\SimpleNeuralNetwork.csproj", "{BC1F8797-3F62-8A77-9011-6A8B8E9ECECF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandwrittenDigits", "4.HandwrittenDigits\HandwrittenDigits.csproj", "{3CC33181-9AE5-13B5-951D-E071926E3DC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanFaces", "5.HumanFaces\HumanFaces.csproj", "{5C9EBEE7-64AA-934D-8932-38C68C5B147A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanFaces", "7.CNNHumanFaces\HumanFaces.csproj", "{2D6DCAEA-1F9E-EC0D-AF82-669FCE864F50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4007C3B2-B89B-4A91-9AF2-AEEED211B362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4007C3B2-B89B-4A91-9AF2-AEEED211B362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4007C3B2-B89B-4A91-9AF2-AEEED211B362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4007C3B2-B89B-4A91-9AF2-AEEED211B362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6426AB0B-DFEA-3B5B-4E18-13CEEC13FFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6426AB0B-DFEA-3B5B-4E18-13CEEC13FFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6426AB0B-DFEA-3B5B-4E18-13CEEC13FFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6426AB0B-DFEA-3B5B-4E18-13CEEC13FFCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C816624D-297C-8265-69D5-593B0BA5A4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C816624D-297C-8265-69D5-593B0BA5A4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C816624D-297C-8265-69D5-593B0BA5A4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C816624D-297C-8265-69D5-593B0BA5A4BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1F8797-3F62-8A77-9011-6A8B8E9ECECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1F8797-3F62-8A77-9011-6A8B8E9ECECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1F8797-3F62-8A77-9011-6A8B8E9ECECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1F8797-3F62-8A77-9011-6A8B8E9ECECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC33181-9AE5-13B5-951D-E071926E3DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC33181-9AE5-13B5-951D-E071926E3DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC33181-9AE5-13B5-951D-E071926E3DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC33181-9AE5-13B5-951D-E071926E3DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C9EBEE7-64AA-934D-8932-38C68C5B147A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9EBEE7-64AA-934D-8932-38C68C5B147A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C9EBEE7-64AA-934D-8932-38C68C5B147A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9EBEE7-64AA-934D-8932-38C68C5B147A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D6DCAEA-1F9E-EC0D-AF82-669FCE864F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D6DCAEA-1F9E-EC0D-AF82-669FCE864F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D6DCAEA-1F9E-EC0D-AF82-669FCE864F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D6DCAEA-1F9E-EC0D-AF82-669FCE864F50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4007C3B2-B89B-4A91-9AF2-AEEED211B362} = {2935AAB7-D39F-3976-A4BF-BDCD89B94C01}
+		{6426AB0B-DFEA-3B5B-4E18-13CEEC13FFCA} = {91A2587E-A454-F7F5-22AF-6CBD952D1115}
+		{C816624D-297C-8265-69D5-593B0BA5A4BA} = {5275630C-974A-FB1B-ECBF-1B9DBF7756A3}
+		{BC1F8797-3F62-8A77-9011-6A8B8E9ECECF} = {2E2AB1EA-14E8-35DC-EB20-8CBEC44FF36B}
+		{3CC33181-9AE5-13B5-951D-E071926E3DC3} = {A136AF9A-6457-DA68-B6F5-7D36F95AB4C2}
+		{5C9EBEE7-64AA-934D-8932-38C68C5B147A} = {97C42FB4-2322-83E9-C4B0-538BFB37A9F4}
+		{2D6DCAEA-1F9E-EC0D-AF82-669FCE864F50} = {CC414259-5D95-3EB2-3689-F003D78E0DED}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9788FF08-DFCD-44C8-999E-68F8135CA167}
+	EndGlobalSection
+EndGlobal
