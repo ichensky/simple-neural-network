@@ -7,10 +7,12 @@ using Generator = CNNHumanFaces.Networks.Generator;
 
 var zipPath = @"/home/john/Downloads/img_align_celeba.zip";
 
-
 var dataset = new CelebA128pxDataSet(zipPath);
+
+Console.WriteLine($"Dataset contains {dataset.Count} images.");
+
 var images = dataset.GetTensors()
-    .Take(100);
+    .Take(10_000);
 
 
 // Save first image to verify loading works
@@ -105,9 +107,8 @@ await generatorGnuPlotWrapper.ExecuteAsync(GnuPlotHelpers
 using var outputReal = discriminator.forward( torch.FloatTensor(images.First()));
 Console.WriteLine($"Real Data Prediction: {outputReal.item<float>()}");
 
-// TODO: fix GenerateRandomImage
-// using var outputFake = discriminator.forward(GenerateRandomImage(imageSize));
-// Console.WriteLine($"Fake Data Prediction: {outputFake.item<float>()}");
+using var outputFake = discriminator.forward(GenerateRandomImage(new long[] { 1, 3, 128, 128 }));
+Console.WriteLine($"Fake Data Prediction: {outputFake.item<float>()}");
 
 
 Console.WriteLine("Exiting...");
@@ -115,7 +116,7 @@ Console.WriteLine("Exiting...");
 
 
 
-static Tensor GenerateRandomImage(int size) => torch.rand(size);
+static Tensor GenerateRandomImage(long[] size) => torch.rand(size);
 
 static Tensor GenerateRandomSeed(int size) => torch.randn(size);
 

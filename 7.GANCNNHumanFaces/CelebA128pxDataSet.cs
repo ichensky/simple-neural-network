@@ -6,7 +6,15 @@ using TorchSharp;
 
 public class CelebA128pxDataSet(string zipFilePath) : torch.utils.data.Dataset<torch.Tensor>
 {
-    public override long Count => throw new NotImplementedException();
+    public override long Count
+    {
+        get
+        {
+            using ZipArchive archive = ZipFile.OpenRead(zipFilePath);
+
+            return GetAllJpgEntries(archive).Count();
+        }
+    }
 
     public override torch.Tensor GetTensor(long index)
     {
