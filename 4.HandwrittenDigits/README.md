@@ -1,5 +1,7 @@
 # Handwritten digits 
 
+GAN (Generative Adversarial Network) 
+
 * Generator: Generates images.
 
 * Discriminator: Detects whether an image is real or fake.

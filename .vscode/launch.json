@@ -41,6 +41,12 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/7.GANCNNHumanFaces/GANCNNHumanFaces.csproj"
+        },
+        {
+            "name": "C#: Launch 8.ConditionalGANHandwrittenDigits",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/8.ConditionalGANHandwrittenDigits/ConditionalGANHandwrittenDigits.csproj"
         }
     ]
 }

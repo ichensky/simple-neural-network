@@ -21,17 +21,20 @@ public class Generator : Module<Tensor, Tensor>
     {
         model = nn.Sequential(
             nn.Linear(inputSize: 100, outputSize: 3*11*11),
-            nn.LeakyReLU(0.2),
+            nn.GELU(),
+            // nn.LeakyReLU(0.2),
 
             new View(1, 3, 11, 11),
 
             nn.ConvTranspose2d(in_channels: 3, out_channels: 256, kernel_size: 8, stride: 2),
             nn.BatchNorm2d(num_features: 256),
-            nn.LeakyReLU(0.2),
+            nn.GELU(),
+            // nn.LeakyReLU(0.2),
 
             nn.ConvTranspose2d(in_channels: 256, out_channels: 256, kernel_size: 8, stride: 2),
             nn.BatchNorm2d(num_features: 256),
-            nn.LeakyReLU(0.2),
+            nn.GELU(),
+            // nn.LeakyReLU(0.2),
 
             nn.ConvTranspose2d(in_channels: 256, out_channels: 3, kernel_size: 8, stride: 2, padding: 1),
             nn.BatchNorm2d(num_features: 3),

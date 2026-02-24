@@ -2,9 +2,9 @@ using TorchSharp.Modules;
 using static TorchSharp.torch;
 using static TorchSharp.torch.nn;
 
-namespace CNNHumanFaces.Networks;
+namespace HandwrittenDigits.Networks;
 
-public class Discriminator : Module<Tensor, Tensor>
+public class Discriminator : Module<Tensor, Tensor, Tensor>
 {
     private readonly Sequential model;
     private readonly Adam optimizer;
@@ -12,25 +12,14 @@ public class Discriminator : Module<Tensor, Tensor>
     public Discriminator() :base("Discriminator")
     {
         model = nn.Sequential(
-            nn.Conv2d(in_channels: 3, out_channels: 256, kernel_size: 8, stride: 2),
-            nn.BatchNorm2d(num_features: 256),
-            // nn.LeakyReLU(0.2),
-            nn.GELU(),
+            nn.Linear(784 + 10, 200),
+            nn.LeakyReLU(0.02),
 
-            nn.Conv2d(in_channels: 256, out_channels: 256, kernel_size: 8, stride: 2),
-            nn.BatchNorm2d(num_features: 256),
-            // nn.LeakyReLU(0.2),
-            nn.GELU(),
-            
-            nn.Conv2d(in_channels: 256, out_channels: 3, kernel_size: 8, stride: 2),
-            //nn.LeakyReLU(0.2),
-            nn.GELU(),
+            nn.LayerNorm(200),
 
-            nn.Flatten(),
-            nn.Linear(3*10*10, 1),
+            nn.Linear(200, 1),
             nn.Sigmoid()
         );
-
 
         RegisterComponents();
 
@@ -46,9 +35,9 @@ public class Discriminator : Module<Tensor, Tensor>
 
     public BCELoss LossFunction { get; }
 
-    public Tensor Train(Tensor input, Tensor target)
+    public Tensor Train(Tensor input, Tensor target, Tensor labelInput)
     {
-        using Tensor output = this.forward(input);
+        using Tensor output = this.forward(input, labelInput);
         Tensor loss = LossFunction.forward(output, target);
 
         this.TrainingLoss.Add(loss.item<float>());
@@ -61,8 +50,12 @@ public class Discriminator : Module<Tensor, Tensor>
     }
 
     public IList<float> TrainingLoss { get; } = [];
-    
-    public override Tensor forward(Tensor input) => model.forward(input);
+
+    public override Tensor forward(Tensor imageInput, Tensor labelInput)
+    {
+        var combinedInput = cat([imageInput, labelInput]);
+        return model.forward(combinedInput);
+    }
 }
 
 
