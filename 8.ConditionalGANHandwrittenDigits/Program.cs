@@ -3,17 +3,19 @@ using TorchSharp;
 using HandwrittenDigits.Networks;
 using static TorchSharp.torch;
 using Generator = HandwrittenDigits.Networks.Generator;
+using SkiaSharp;
 
 
 // var pathData = "../../../../data/mnist_train_100.csv";
 var pathData = "/home/john/Downloads/mnist_train.csv/mnist_train.csv";
 var lines = await File.ReadAllLinesAsync(pathData);
 var images = lines.Select(line => new MnistImage(line))
-    //.ToArray();
-    .Take(10_000).ToArray();
+    .ToArray();
+    //.Take(10_00).ToArray();
 
 var dataset = new MnistDataSet(images);
 
+// MnistDataSet.SaveImage(dataset.First().imageValues, "/home/john/Desktop/RAMtmp/original_image.jpg");
 
 
 
@@ -80,22 +82,27 @@ for (int epoch = 0; epoch < epochs; epoch++)
 
 // Generate and display images from the trained Generator
 // For demonstration, will generate images conditioned on the label '4'
-using var label4 = torch.zeros(10);
-label4[3] = 1.0f;
-using var imagePlot = new GnuPlot();
-imagePlot.Start();
+// using var imagePlot = new GnuPlot();
+// imagePlot.Start();
 
-for(int i =0;i<10;i++)
+foreach (var labelNumber in Enumerable.Range(0, 10))
 {
-    using var randomSeed = GenerateRandomSeed(100);
-    using var outputTensor = generator.forward(randomSeed, label4).detach();
-    var output = outputTensor.data<float>().ToArray();
+    using var label = torch.zeros(10);
+    label[labelNumber] = 1.0f;
 
-    await imagePlot.ExecuteAsync(GnuPlotHelpers
-        .ShowImage(output, "image").AsMemory());
-    await Task.Delay(100);
+    for (int i = 0; i < 5; i++)
+    {
+        using var randomSeed = GenerateRandomSeed(100);
+        using var outputTensor = generator.forward(randomSeed, label).detach();
+        var output = outputTensor.data<float>().ToArray();
+
+        MnistDataSet.SaveImage(outputTensor, $"/home/john/Desktop/RAMtmp/generated_image_{labelNumber}_{i}.jpg");
+        // await imagePlot.ExecuteAsync(GnuPlotHelpers
+        //     .ShowImage(output, "image").AsMemory());
+        // await Task.Delay(100);
+    }
+
 }
-
 
 
 
@@ -146,3 +153,5 @@ static Tensor GenerateRandomLabel(int size, Random random)
 
     return label;
 }
+
+  
