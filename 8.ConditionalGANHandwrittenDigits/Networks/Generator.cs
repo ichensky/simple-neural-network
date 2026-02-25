@@ -31,7 +31,7 @@ public class Generator : Module<Tensor, Tensor, Tensor>
     public Tensor Train(Discriminator discriminator, Tensor input, Tensor labelInput, Tensor target)
     {
         using Tensor geneartorOutput = this.forward(input, labelInput);
-        using Tensor discriminatorOutput = discriminator.forward(geneartorOutput, labelInput);
+        using Tensor discriminatorOutput = discriminator.forward(imageInput: geneartorOutput, labelInput);
         Tensor loss = discriminator.LossFunction.forward(discriminatorOutput, target);
 
         this.TrainingLoss.Add(loss.item<float>());

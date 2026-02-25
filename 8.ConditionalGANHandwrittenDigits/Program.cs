@@ -10,7 +10,7 @@ var pathData = "/home/john/Downloads/mnist_train.csv/mnist_train.csv";
 var lines = await File.ReadAllLinesAsync(pathData);
 var images = lines.Select(line => new MnistImage(line))
     //.ToArray();
-    .Take(1_000).ToArray();
+    .Take(10_000).ToArray();
 
 var dataset = new MnistDataSet(images);
 
@@ -28,14 +28,14 @@ var dataset = new MnistDataSet(images);
 // }
 
 
-var epochs = 4;
+var epochs = 12;
 using var realLabels = torch.FloatTensor(new float[] { 1.0f });
 using var fakeLabels = torch.FloatTensor(new float[] { 0.0f });
+using var realLabelInput = torch.FloatTensor(Enumerable.Repeat(1.0f, 10).ToArray());
+using var fakeLabelInput = torch.FloatTensor(Enumerable.Repeat(0.0f, 10).ToArray());
 var discriminator = new Discriminator();
 var generator = new Generator();
 var random = new Random();
-using var realLabelInput = torch.FloatTensor(Enumerable.Repeat(1.0f, 10).ToArray());
-using var fakeLabelInput = torch.FloatTensor(Enumerable.Repeat(0.0f, 10).ToArray());
 
 int im;
 for (int epoch = 0; epoch < epochs; epoch++)
@@ -54,17 +54,23 @@ for (int epoch = 0; epoch < epochs; epoch++)
 
         // Train Discriminator on real data
         using var realData = trainImage.imageValues;
-        using var lossReal = discriminator.Train(realData, realLabels, realLabelInput);
+        using var realDataTarget = trainImage.target;
+        using var lossReal = discriminator.Train(realData, realDataTarget, realLabels);
 
         // Train Discriminator on fake data
-        using var randomLabel = GenerateRandomLabel(10, random);
-        using var randomSeedDiscriminator = GenerateRandomSeed(100);
-        using var fakeData = generator.forward(randomSeedDiscriminator, randomLabel).detach();
-        using var lossFake = discriminator.Train(fakeData, fakeLabels, fakeLabelInput);
+        {
+            using var randomLabel = GenerateRandomLabel(10, random);
+            using var randomSeedDiscriminator = GenerateRandomSeed(100);
+            using var fakeData = generator.forward(randomSeedDiscriminator, randomLabel).detach();
+            using var lossFake = discriminator.Train(fakeData, randomLabel, fakeLabels);
+        }
 
         // Train Generator
+        {
+        using var randomLabel = GenerateRandomLabel(10, random);
         using var randomSeedGenerator = GenerateRandomSeed(100);
-        using var lossGenerator = generator.Train(discriminator, randomSeedGenerator, realLabelInput, realLabels);
+        using var lossGenerator = generator.Train(discriminator, randomSeedGenerator, randomLabel, realLabels);
+        }
     }
 }
 
@@ -72,15 +78,17 @@ for (int epoch = 0; epoch < epochs; epoch++)
 
 
 
+// Generate and display images from the trained Generator
+// For demonstration, will generate images conditioned on the label '4'
+using var label4 = torch.zeros(10);
+label4[3] = 1.0f;
 using var imagePlot = new GnuPlot();
 imagePlot.Start();
 
 for(int i =0;i<10;i++)
 {
-    using var label = torch.zeros(10);
-    label[i] = 1.0f;
     using var randomSeed = GenerateRandomSeed(100);
-    using var outputTensor = generator.forward(randomSeed, label).detach();
+    using var outputTensor = generator.forward(randomSeed, label4).detach();
     var output = outputTensor.data<float>().ToArray();
 
     await imagePlot.ExecuteAsync(GnuPlotHelpers

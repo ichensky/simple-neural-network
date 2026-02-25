@@ -35,7 +35,7 @@ public class Discriminator : Module<Tensor, Tensor, Tensor>
 
     public BCELoss LossFunction { get; }
 
-    public Tensor Train(Tensor input, Tensor target, Tensor labelInput)
+    public Tensor Train(Tensor input, Tensor labelInput, Tensor target)
     {
         using Tensor output = this.forward(input, labelInput);
         Tensor loss = LossFunction.forward(output, target);
